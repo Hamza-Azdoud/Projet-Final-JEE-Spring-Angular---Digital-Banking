@@ -1,18 +1,17 @@
 package com.pfe.back;
 
-import com.pfe.back.entities.AccountOperation;
-import com.pfe.back.entities.CurrentAccount;
-import com.pfe.back.entities.Customer;
-import com.pfe.back.entities.SavingAccount;
+import com.pfe.back.entities.*;
 import com.pfe.back.enums.AccountStatus;
 import com.pfe.back.enums.OperationType;
 import com.pfe.back.repository.AccountOperationRepository;
 import com.pfe.back.repository.BankAccountRepository;
 import com.pfe.back.repository.CustomerRepository;
+import com.pfe.back.services.BankService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.UUID;
@@ -25,6 +24,12 @@ public class PfeSpringAngularDigitalBankingBackApplication {
         SpringApplication.run(PfeSpringAngularDigitalBankingBackApplication.class, args);
     }
     @Bean
+    CommandLineRunner commandLineRunner (BankService bankService){
+        return args->{
+            bankService.consulter();
+        };
+    }
+    //@Bean
     CommandLineRunner start(CustomerRepository customerRepository,
                             BankAccountRepository bankAccountRepository,
                             AccountOperationRepository accountOperationRepository){
@@ -60,12 +65,15 @@ public class PfeSpringAngularDigitalBankingBackApplication {
                     AccountOperation accountOperation = new AccountOperation();
                     //accountOperation.setId(UUID.randomUUID().toString());
                     accountOperation.setOperationDate(new Date());
-                    accountOperation.setAmount(Math.random()*12000);
-                    accountOperation.setType(Math.random()>0.5? OperationType.DEBIT: OperationType.CREDIT);
+                    accountOperation.setAmount(Math.random() * 12000);
+                    accountOperation.setType(Math.random() > 0.5 ? OperationType.DEBIT : OperationType.CREDIT);
                     accountOperation.setBankAccount(acc);
                     accountOperationRepository.save(accountOperation);
                 }
+
             });
+
         };
     }
+
 }

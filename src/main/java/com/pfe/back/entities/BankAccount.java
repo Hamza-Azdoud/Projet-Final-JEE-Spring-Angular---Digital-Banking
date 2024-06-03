@@ -18,8 +18,10 @@ public abstract class BankAccount {
     private String id;
     private double balance;
     private Date createdAt;
+
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
+
     @ManyToOne
     @JoinColumn(name = "customer_ID")
     private Customer customer;
