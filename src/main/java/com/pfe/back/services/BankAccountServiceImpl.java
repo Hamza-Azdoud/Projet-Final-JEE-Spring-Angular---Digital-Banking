@@ -9,6 +9,7 @@ import com.pfe.back.repository.AccountOperationRepository;
 import com.pfe.back.repository.BankAccountRepository;
 import com.pfe.back.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,13 +22,12 @@ import java.util.logging.Logger;
 @Service
 @Transactional
 @AllArgsConstructor
+@Slf4j
 public class BankAccountServiceImpl implements BankAccountService{
 
     private CustomerRepository customerRepository;
     private BankAccountRepository bankAccountRepository;
-    private BankAccountService bankAccountService;
     private AccountOperationRepository accountOperationRepository;
-    Logger log = (Logger) LoggerFactory.getLogger(this.getClass().getName());
 
     @Override
     public Customer saveCustomer(Customer customer) {
@@ -118,5 +118,10 @@ public class BankAccountServiceImpl implements BankAccountService{
     public void transfer(String accountIdSource, String accountIdDestination, double amount) throws BankAccountNotFoundException, BalanceNotSufficientException {
         debit(accountIdSource,amount,"Transfer to "+accountIdDestination);
         credit(accountIdDestination,amount,"Transfer from " +accountIdSource);
+    }
+
+    @Override
+    public List<BankAccount> bankAccountList(){
+        return bankAccountRepository.findAll();
     }
 }
