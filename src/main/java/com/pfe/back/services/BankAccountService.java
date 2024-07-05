@@ -1,5 +1,6 @@
 package com.pfe.back.services;
 
+import com.pfe.back.dtos.CustomerDTO;
 import com.pfe.back.entities.BankAccount;
 import com.pfe.back.entities.CurrentAccount;
 import com.pfe.back.entities.Customer;
@@ -17,7 +18,7 @@ public interface BankAccountService {
 
     SavingAccount saveSavingBankAccount(double initialBalance, double interestRate, Long customerId) throws CustomerNotFoundException;
 
-    List<Customer> listCustomer();
+    List<CustomerDTO> listCustomer();
 
     BankAccount getBankAccount(String accountId) throws BankAccountNotFoundException;
 

@@ -1,5 +1,6 @@
 package com.pfe.back.web;
 
+import com.pfe.back.dtos.CustomerDTO;
 import com.pfe.back.entities.Customer;
 import com.pfe.back.services.BankAccountService;
 import lombok.AllArgsConstructor;
@@ -17,8 +18,9 @@ import java.util.List;
 public class CustomerRestController {
     private BankAccountService bankAccountService;
     @GetMapping("/customers")
-    public List<Customer> customers(){
+    public List<CustomerDTO> customers(){
         return bankAccountService.listCustomer();
     }
+
 
 }
