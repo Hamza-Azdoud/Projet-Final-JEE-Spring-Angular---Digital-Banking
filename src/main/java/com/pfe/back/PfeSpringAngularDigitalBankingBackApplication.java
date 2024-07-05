@@ -1,5 +1,6 @@
 package com.pfe.back;
 
+import com.pfe.back.dtos.CustomerDTO;
 import com.pfe.back.entities.*;
 import com.pfe.back.enums.AccountStatus;
 import com.pfe.back.enums.OperationType;
@@ -32,7 +33,7 @@ public class PfeSpringAngularDigitalBankingBackApplication {
     CommandLineRunner commandLineRunner (BankAccountService bankAccountService){
         return args->{
             Stream.of("Hamza","Khalid","Zouhair").forEach(name ->{
-                Customer customer=new Customer();
+                CustomerDTO customer=new CustomerDTO();
                 customer.setName(name);
                 customer.setEmail(name+"@gmail.com");
                 bankAccountService.saveCustomer(customer);
