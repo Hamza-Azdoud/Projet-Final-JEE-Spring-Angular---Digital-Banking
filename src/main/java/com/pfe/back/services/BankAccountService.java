@@ -1,6 +1,9 @@
 package com.pfe.back.services;
 
+import com.pfe.back.dtos.BankAccountDTO;
+import com.pfe.back.dtos.CurrentBankAccountDTO;
 import com.pfe.back.dtos.CustomerDTO;
+import com.pfe.back.dtos.SavingBankAccountDTO;
 import com.pfe.back.entities.BankAccount;
 import com.pfe.back.entities.CurrentAccount;
 import com.pfe.back.entities.Customer;
@@ -14,13 +17,13 @@ import java.util.List;
 public interface BankAccountService {
     CustomerDTO saveCustomer(CustomerDTO customerDTO);
 
-    CurrentAccount saveCurrentBankAccount(double initialBalance, double overDraft, Long customerId) throws CustomerNotFoundException;
+    CurrentBankAccountDTO saveCurrentBankAccount(double initialBalance, double overDraft, Long customerId) throws CustomerNotFoundException;
 
-    SavingAccount saveSavingBankAccount(double initialBalance, double interestRate, Long customerId) throws CustomerNotFoundException;
+    SavingBankAccountDTO saveSavingBankAccount(double initialBalance, double interestRate, Long customerId) throws CustomerNotFoundException;
 
     List<CustomerDTO> listCustomer();
 
-    BankAccount getBankAccount(String accountId) throws BankAccountNotFoundException;
+    BankAccountDTO getBankAccount(String accountId) throws BankAccountNotFoundException;
 
     void debit(String accountId, double amount, String description) throws BankAccountNotFoundException, BalanceNotSufficientException;
 
