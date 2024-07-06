@@ -1,9 +1,6 @@
 package com.pfe.back.services;
 
-import com.pfe.back.dtos.BankAccountDTO;
-import com.pfe.back.dtos.CurrentBankAccountDTO;
-import com.pfe.back.dtos.CustomerDTO;
-import com.pfe.back.dtos.SavingBankAccountDTO;
+import com.pfe.back.dtos.*;
 import com.pfe.back.entities.BankAccount;
 import com.pfe.back.entities.CurrentAccount;
 import com.pfe.back.entities.Customer;
@@ -31,11 +28,15 @@ public interface BankAccountService {
 
     void transfer(String accountIdSource, String accountIdDestination, double amount) throws BankAccountNotFoundException, BalanceNotSufficientException;
 
-    List<BankAccount> bankAccountList();
+    List<BankAccountDTO> bankAccountList();
 
     CustomerDTO getCustomer(Long customerID) throws CustomerNotFoundException;
 
     CustomerDTO updateCustomer(CustomerDTO customerDTO);
 
     void deleteCustomer(Long customerID);
+
+    List<AccountOperationDTO> accountHistory(String accountId);
+
+    AccountHistoryDTO getAccountHistory(String accountId, int page, int size) throws BankAccountNotFoundException;
 }
